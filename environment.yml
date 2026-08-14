@@ -1,0 +1,12 @@
+name: md2pdf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandoc
+  - tectonic
+  - pip
+  - pip:
+      - mkdocs
+      - mkdocs-material
+      - ghp-import
