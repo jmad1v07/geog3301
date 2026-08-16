@@ -1,4 +1,4 @@
-name: md2pdf
+name: geog3301-labs
 channels:
   - conda-forge
 dependencies:
