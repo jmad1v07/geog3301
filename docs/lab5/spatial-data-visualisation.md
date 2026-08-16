@@ -32,9 +32,9 @@ One of the key aspects of spatial data visualisation is using colour to represen
 
 ### Colour
 
-Color is defined by the characteristics of a mix wavelengths of light in the visible spectrum <a href="https://ggplot2-book.org/index.html" target="_blank">Wickham (2020)</a>. A particular colour is defined by levels of intensity of light in different parts of the visible spectrum (e.g. yellow is a mixture of light in red and green wavelengths). The human eye can distinguish millions of colours <a href="https://www.crcsi.com.au/assets/Consultancy-Reports-and-Case-Studies/Earth-Observation-reports-updated-Feb-2019/Vol2A-low-res-20MB.pdf" target="_blank">CRCSI (2017)</a>; thus, colour is useful for representing variation, patterns, or interesting features in your data. 
+Color is defined by the characteristics of a mix wavelengths of light in the visible spectrum <a href="https://ggplot2-book.org/index.html" target="_blank">Wickham (2020)</a>. A particular colour is defined by levels of intensity of light in different parts of the visible spectrum (e.g. yellow is a mixture of light in red and green wavelengths). The human eye can distinguish millions of colours <a href="https://drive.google.com/file/d/1znLFh6rZHnkWMSGV-JA8OGS0g90Rtwco/view?usp=drive_link" target="_blank">CRCSI (2017)</a>; thus, colour is useful for representing variation, patterns, or interesting features in your data. 
 
-An individual colour can be described in terms of hue, value, or chroma <a href="https://www.crcsi.com.au/history-2/earth-observation-series-2/" target="_blank">(CRCSI, 2016)</a>:
+An individual colour can be described in terms of hue, value, or chroma <a href="https://www.eoa.org.au/earth-observation-textbooks" target="_blank">(CRCSI, 2016)</a>:
 
 * **Hue:** the attribute commonly associated with colour. Hues have an order which follows the colours of the spectrum and spectral hues can be created by mixing adjacent wavelengths. Purple, for example, is a non-spectral hue as it is a mixture of blue and red whose wavelengths are not adjacent. 
 * **Brightness (Value / Intensity):** is the perceived brightness of a colour and is related to the amount of energy in all wavelengths of light reflected by an object. 
@@ -46,13 +46,13 @@ An individual colour can be described in terms of hue, value, or chroma <a href=
 
 Colour is represented by combinations (addition) of red, green, and blue light. Red, green, and blue are primary colours and combine to form white. An absence of red, green, and blue is black. Secondary colours can be formed by the addition of primary colours of varying intensities (e.g. yellow is the addition of red and green, magenta is the addition of red and blue, and cyan is the addition of green and blue). A related colour model uses subtractive primary colours (yellow, magenta, or cyan) which are subtracted from a white background to produce different colours.
 
-![Additive and subtractive colour models (source: [CRCSI (2017)](https://www.crcsi.com.au/assets/Consultancy-Reports-and-Case-Studies/Earth-Observation-reports-updated-Feb-2019/Vol2A-low-res-20MB.pdf)).](../images/colour-models-crcsi.png)
+![Additive and subtractive colour models (source: [CRCSI (2017)](https://drive.google.com/file/d/1znLFh6rZHnkWMSGV-JA8OGS0g90Rtwco/view?usp=drive_link)).](../images/colour-models-crcsi.png)
 
 
 Colour can be represented by coordinates in 3D space using the RGB colour cube where each dimension is represented by a primary colour. The intensity of a colour is represented by its position along a dimension. Grey colours, equal intensities of each of the primary colours, is represented by the diagonal axis from black (absence of primary colours) to white (complete presence of the spectrum of colours). 
 
 
-![RGB Colour Cube (source: [CRCSI (2017)](https://www.crcsi.com.au/assets/Consultancy-Reports-and-Case-Studies/Earth-Observation-reports-updated-Feb-2019/Vol2A-low-res-20MB.pdf)).](../images/rgb-colour-cube.png)
+![RGB Colour Cube (source: [CRCSI (2017)](https://drive.google.com/file/d/1znLFh6rZHnkWMSGV-JA8OGS0g90Rtwco/view?usp=drive_link)).](../images/rgb-colour-cube.png)
 
 
 **Hue, Saturation, Intensity (HSI) Colour Space** 
@@ -104,7 +104,7 @@ In some cases, your data might have a logical midpoint value (e.g. median) and y
 
 The <a href="https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3" target="_blank">Color Brewer</a> website is a good resource for generating colour palettes for spatial data which also account for colour blindness. 
 
-Be aware of context and how the relationship between objects on a map display can affect how they are perceived by human eyes. For example, thin geometric features are not easily detected when represented in blue hues, the perceived hue of an object changes with background colour (blue features are hard to detect on black backgrounds, yellow is hard to detect on white backgrounds), and the perceived chroma of an object is related to feature size. <a href="https://www.crcsi.com.au/assets/Consultancy-Reports-and-Case-Studies/Earth-Observation-reports-updated-Feb-2019/Vol2A-high-res-84MB.pdf" target="_blank">Excursus 5.2 (CRCSI, 2017; p. 75)</a> highlights how color composition can obscure or misrepresent variation in spatial data. 
+Be aware of context and how the relationship between objects on a map display can affect how they are perceived by human eyes. For example, thin geometric features are not easily detected when represented in blue hues, the perceived hue of an object changes with background colour (blue features are hard to detect on black backgrounds, yellow is hard to detect on white backgrounds), and the perceived chroma of an object is related to feature size. <a href="https://drive.google.com/file/d/1znLFh6rZHnkWMSGV-JA8OGS0g90Rtwco/view?usp=drive_link" target="_blank">Excursus 5.2 (CRCSI, 2017; p. 75)</a> highlights how color composition can obscure or misrepresent variation in spatial data. 
 
 <details>
   <summary><b>Go to the <a href="https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3" target="_blank">Color Brewer</a> website and choose a colour palette to represent spatial variation in precipitation? Justify why this is a suitable colour palette. Look out for how to copy the hexadecimal values representing the colours in your palette as a JavaScript array.</b></summary>
@@ -308,7 +308,7 @@ Map.addLayer(lstLandsat8, lstVisParam, "Surface Temperature (K)");
 
 ## Multiband Images
 
-`Images` in Google Earth Engine can have multiple bands where each band comprises georeferenced raster data. As discussed above, computer displays represent colour through varying the intensity of sub-pixel displays of red, green and blue light. Variability in data values in multiband `Images` can be visualised by relating data values in one band of the `Image` to the intensity of one the primary colours on the computer display. Visualising a multiband `Image` in this way creates an additive RGB or colour composite image - it is called a composite image because each pixel is a composite of red, green, and blue light <a href="https://www.crcsi.com.au/assets/Consultancy-Reports-and-Case-Studies/Earth-Observation-reports-updated-Feb-2019/Vol2A-high-res-84MB.pdf" target="_blank">Excursus 5.2 (CRCSI, 2017)</a>. 
+`Images` in Google Earth Engine can have multiple bands where each band comprises georeferenced raster data. As discussed above, computer displays represent colour through varying the intensity of sub-pixel displays of red, green and blue light. Variability in data values in multiband `Images` can be visualised by relating data values in one band of the `Image` to the intensity of one the primary colours on the computer display. Visualising a multiband `Image` in this way creates an additive RGB or colour composite image - it is called a composite image because each pixel is a composite of red, green, and blue light <a href="https://drive.google.com/file/d/1znLFh6rZHnkWMSGV-JA8OGS0g90Rtwco/view?usp=drive_link" target="_blank">Excursus 5.2 (CRCSI, 2017)</a>. 
 
 ### True Colour Composite Image
 
@@ -347,7 +347,7 @@ Your visualisation of the Urban Monitor `Image` data as a true colour composite 
 
 You can associate other `Image` bands to intensities of red, green and blue light on your display even if these bands do not actually measure sprectral reflectance in the red, green and blue wavelengths. This is a false colour composite image. Some features of Earth's land surface have distinct reflectance characteristics in portions of the electromagnetic spectrum outside the visible wavelengths. For example, vegetation has high reflectance in the NIR wavelengths. 
 
-A common false colour composite image associates NIR reflectance with red intensities on your display, red spectral reflectance with green on your display and green spectral reflectance with blue on your display <a href="https://www.crcsi.com.au/assets/Consultancy-Reports-and-Case-Studies/Earth-Observation-reports-updated-Feb-2019/Vol2A-high-res-84MB.pdf" target="_blank">Excursus 5.2 (CRCSI, 2017)</a>. This false colour composite will visualise vegetation in red shades (due to high reflectance in the NIR wavelengths), red soils as green (due to soils having high reflectance in the red wavelengths), and water as blue (due to water having relatively higher reflectance in the green wavelengths).
+A common false colour composite image associates NIR reflectance with red intensities on your display, red spectral reflectance with green on your display and green spectral reflectance with blue on your display <a href="https://drive.google.com/file/d/1znLFh6rZHnkWMSGV-JA8OGS0g90Rtwco/view?usp=drive_link" target="_blank">Excursus 5.2 (CRCSI, 2017)</a>. This false colour composite will visualise vegetation in red shades (due to high reflectance in the NIR wavelengths), red soils as green (due to soils having high reflectance in the red wavelengths), and water as blue (due to water having relatively higher reflectance in the green wavelengths).
 
 <details>
   <summary><b>Bare soil has high spectral reflectance in the blue, green, red, and NIR wavelengths. What colour will bare soil be visualised in on your map display? (Hint: use this <a href="https://www.w3schools.com/colors/colors_rgb.asp" target="_blank">RGB colour picker</a> to create a colour that is composed of high intensities in red, green, and blue).</b></summary>
