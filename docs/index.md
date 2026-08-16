@@ -50,6 +50,6 @@ There are a range user resources for Google Earth Engine. You should use these r
 1. <a href="https://developers.google.com/earth-engine/" target="_blank">Google Earth Engine introduction</a> - comprehensive overview of Google Earth Engine's capabilities. 
 2. <a href="https://developers.google.com/earth-engine/tutorials" target="_blank">Google Earth Engine tutorials</a> - range of introductory and advanced tutorials on using Google Earth Engine for geospatial data analysis.
 3. <a href="https://developers.google.com/earth-engine/edu" target="_blank">Google Earth Engine for education</a> - range of training resources. 
-4. User Forum and help tab in the code editor (see below).
+
 
 
