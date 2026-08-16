@@ -1,0 +1,1149 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../javascript-intro/">
+      
+      
+        <link rel="next" href="../spatial-data-visualisation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Spatial data in GEE - GEOG3301 GEE Labs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spatial-data-in-google-earth-engine" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-header__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GEOG3301 GEE Labs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Spatial data in GEE
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-nav__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GEOG3301 GEE Labs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lab 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gee-101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GEE 101
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../javascript-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial data in GEE
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial data in GEE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-and-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client and Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-ee-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The ee object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spatial-data-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Data Models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spatial Data Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vector-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vector Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raster-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Raster Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Structures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spatial-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Data Structures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spatial Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry Objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spatial-data-visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial data visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-and-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client and Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-ee-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The ee object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spatial-data-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Data Models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spatial Data Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vector-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vector Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raster-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Raster Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Structures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spatial-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Data Structures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spatial Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry Objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="spatial-data-in-google-earth-engine">Spatial data in Google Earth Engine</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This lab introduces spatial data models for representing geographic entities in Google Earth Engine. </p>
+<h3 id="setup">Setup</h3>
+<p>Create a new script in your <em>labs-gee/lab-5</em> repository called <em>spatial-data-in-gee.js</em>. Enter the following comment header to the script. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">/*</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cm">Spatial data in GEE</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cm">Author: Test</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="cm">Date: XX-XX-XXXX</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="cm">*/</span>
+</span></code></pre></div>
+<h2 id="client-and-server">Client and Server</h2>
+<p>In the JavaScript intro lab you wrote programs that are executed in your browser and run on the hardware in your local machine (i.e. any data in variables you declare resides in your computer's memory and the functions you call run on your computer's CPU). </p>
+<p>However, your machine has limited storage, memory, and processing power. Google Earth Engine allows you to access cloud servers comprising more powerful computers and access to larger datasets. You still write a Google Earth Engine program in JavaScript using the code editor in your browser; however, the servers storing and processing the geospatial data in your program are remotely located in the cloud. </p>
+<p>The execution of a Google Earth Engine program is as follows:</p>
+<ol>
+<li>You write a series of JavaScript statements that identify geospatial data, operations to perform on this data and the results to be returned from this processing.</li>
+<li>Your browser sends these statements to the Google servers.</li>
+<li>The Google servers process your message, access the data you requested, and perform the operations outlined in your script.</li>
+<li>Results your program requests back from the Google servers are returned to your browser and displayed (e.g. a map is drawn in your browser display, results are printed to the console, a file is made available to download).</li>
+</ol>
+<h2 id="the-ee-object">The <code>ee</code> object</h2>
+<p>It is important to distinguish between variables that are stored, and operations that are run, locally on your machine and data and operations that run in the cloud. The <code>ee</code> prefix identifies a server side object. For example, <code>var localString = 'on my computer'</code> is a string type variable stored locally on your machine where as <code>var cloudString = ee.String('in the cloud')</code> is a proxy object for a variable containing string data located on servers in the cloud. </p>
+<p>In general, any variable that is declared as <code>ee.&lt;Thing&gt;()</code> is server side and any method or operation of the form <code>ee.&lt;Thing&gt;().method()</code> is a server side operation. One way of understanding <code>ee.&lt;Thing&gt;()</code> is as a container that you put instructions inside to send to the Google servers; for example, in <code>var cloudString = ee.String('in the cloud')</code> you are putting a client side string <code>'in the cloud'</code> in a container and that is sent to servers in the cloud. Similarly, you could put the ID of geospatial data that is stored in cloud databases and assign it to server side variables that are used in your program; executing <code>var landsatImage = ee.Image('LANDSAT/LC8_L1T_TOA/LC81130822014033LGN00')</code> will assign the Landsat image with the specified ID to the variable <code>landsatImage</code> in your script. </p>
+<p>If the geospatial data and operations used in your program are server side how do you access or visualise the results? There are a range of functions in Google Earth Engine that let you request data from the server to be displayed in your browser. For example, the <code>print()</code> function can request server side objects and print them to the <em>Console</em> and the <code>Map.addLayer()</code> function requests spatial data which is displayed in the map. </p>
+<h2 id="spatial-data-models">Spatial Data Models</h2>
+<p>A spatial data model refers to a conceptual model for describing geographic phenomena or entities. A spatial data model typically contains two pieces of information: </p>
+<ul>
+<li>Positional information describing location, shape, and extent (e.g. an <code>(x, y)</code> coordinate pair representing the location of a weather station).</li>
+<li>Attribute information describing characteristics of the phenomenon or entity (e.g. a name:value pair recording the name of the weather station <code>name:'Perth Airport'</code>). </li>
+</ul>
+<p>A spatial data model is a <em>representation</em> of geographic entities; therefore, some detail is abstracted away. </p>
+<h3 id="vector-data-model">Vector Data Model</h3>
+<p>The vector data model represents geographic phenomena or entities as geometric features: </p>
+<ul>
+<li>points (i.e. a coordinate pair of values)</li>
+<li>lines (i.e. two or more points connected by a line) </li>
+<li>polygons (i.e. three or more points connected by a non-intersecting line which "closes" the polygon) </li>
+</ul>
+<p>Along with coordinates that represent the position of the geometry, vector data also stores non-spatial attribute information which describe characteristics of the geographic phenomenon or entity represented by the geometry feature.</p>
+<p>The figure below demonstrates how geographic entities in Perth can be represented using the vector data model. The blue line feature broadly captures the shape of the river; however, it is a simplification as it does not provide information about how the river's width varies across space. The red point feature is used to represent the location of Perth; this might be an appropriate way to represent Perth's location on a zoomed out map but it does not capture Perth's actual extent. </p>
+<details>
+  <summary><b>What detail is abstracted away by representing Kings Park using the green polygon feature?</b></summary>
+  <p>
+    <ul>
+      <li>Shape of Kings Park is simplified using only 6 vertices.</li>
+      <li>Variation in land cover types and land uses within the park is not captured.</li>
+    </ul>
+  </p>
+</details>
+
+<p><img alt="Representing geographic entities using the vector data model." src="../../images/vector-data-model.png" /></p>
+<h3 id="raster-data-model">Raster Data Model</h3>
+<p>The raster data model represents geographic phenomena or entities as a grid of cells (pixels). Attribute information about geographic entities is described by assigning a value to each pixel. The dimensions of a pixel relative to distance on the Earth's land surface determines the complexity and detail of spatial features that can be resolved in raster data. A pixel that represents a 1 km x 1 km footprint on the Earth's surface will not be able to represent an individual tree or a single building. Pixel values can be continuous (e.g. values represent precipitation) or categorical (e.g. values represent a land cover type).</p>
+<p>The figure below shows the 2018 European Space Agency (ESA) <a href="https://www.esa-landcover-cci.org" target="_blank">Climate Change Initiative (CCI) land cover map</a> for 2018. This is a raster data model representation of land cover; each pixel represents a 300 m x 300 m area on the Earth's land surface and a pixel can only represent a single land cover type. If you look at the bottom two zoomed in maps you can see some limitations of modelling land cover using 300 m x 300 m spatial resolution raster data. The shape of land cover features are poorly represented by the "block-like" arrangement of pixels and there is variation in land cover within a single pixel (a mixed pixel problem). </p>
+<p><img alt="Representing land cover using the raster data model." src="../../images/raster-data-model.png" /></p>
+<details>
+  <summary><b>How could you represent spatial variation in elevation using vector and raster data models?</b></summary>
+  <p>
+    <ul>
+      <li>Vector data model: contour lines.</li>
+      <li>Raster data model: digital elevation model (DEM) - each pixel value represents the elevation at that location.</li>
+    </ul>
+  </p>
+</details>
+
+<h2 id="data-structures">Data Structures</h2>
+<p>Data structures are used to implement data models in a computer system. GEE has a range of non-spatial data structures. </p>
+<table style="border-collapse: collapse; border-bottom: 1px solid #ddd; padding: 15px;">
+  <caption>Google Earth Engine Data Structures</caption>
+  <tr>
+    <th>Name</th>
+    <th>Constructor</th>
+    <th>Summary</th>
+  </tr>
+  <tr>
+    <td>String</td>
+    <td><code>ee.String()</code></td>
+    <td>Create a string object on the GEE server. Useful for storing text data (e.g. name of a weather station) and metadata.</td>
+  </tr>
+  <tr>
+    <td>Dictionary</td>
+    <td><code>ee.Dictionary()</code></td>
+    <td>Create a dictionary object on the GEE server. Dictionary object comprise key and value pairs which describe properties of an object (e.g. a dictionary object could contain key attributes about a point feature representing a city - <code>{city: 'Perth', population: '1000000'}</code> - or metadata about a remote sensing image capture - <code>{CLOUD_COVER: 0.059, DATE_ACQUIRED: 2014-03-18, DATUM: WGS84}</code>).</td>
+  </tr>
+   <tr>
+    <td>Number</td>
+    <td><code>ee.Number()</code></td>
+    <td>Create a number object on the GEE server. Useful for storing quantitative data (e.g. the result of a mathematical operation or a numeric measurement such as temperature).</td>
+  </tr>
+  <tr>
+    <td>List</td>
+    <td><code>ee.List()</code></td>
+    <td>Create a list object on the GEE server. Useful for organising different objects (e.g. a list can store images, features, an array, and a string in one object - <code>var list = ee.List([1, 'text']);</code>).</td>
+  </tr>
+  <tr>
+    <td>Array</td>
+    <td><code>ee.Array()</code></td>
+    <td>Create an array object on the GEE server. 1-D vector, 2-D matrics, 3-D cubes, or n-D hypercubes. Arrays are created from lists of numbers and lists of lists (e.g. <code>var arr = ee.Array({[1, 2], [1, 2]});</code> - a 2x2 array). This demonstrates how complex data structures and objects are constructed from simpler data structures.</td>
+  </tr>
+  <tr>
+    <td>Date</td>
+    <td><code>ee.Date()</code></td>
+    <td>Create a date object on the GEE server. Useful for storing temporal attributes about geographic data (e.g. date of satellite image capture).</td>
+  </tr>
+</table>
+
+<h2 id="spatial-data-structures">Spatial Data Structures</h2>
+<h3 id="images">Images</h3>
+<p>Raster data in GEE are represented as <code>Image</code> objects. </p>
+<p>To create an <code>Image</code> object that stores raster data on the GEE server use the <code>ee.Image()</code> constructor. You pass arguments into the parentheses of the <code>ee.Image()</code> constructor to specify what raster data should be represented by the <code>Image</code> object. If you pass a number into <code>ee.Image()</code> you will get a constant image where each pixel value is the number passed in. </p>
+<p>Add the following code to your GEE script. This will create an <code>Image</code> object where each pixel has the value 5 with the variable name <code>img5</code>. Click on the <em>Inspector</em> tab and then click at locations on the map. You should see the value 5 printed in the <em>Inspector</em>.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Raster where pixel values equal 5</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">img5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Image</span><span class="p">(</span><span class="mf">5</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">img5</span><span class="p">);</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">img5</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">palette</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;FF0000&#39;</span><span class="p">]},</span><span class="w"> </span><span class="s1">&#39;Raster with pixel value = 5&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Alternatively, you can pass a string id into the <code>ee.Image()</code> constructor to specify a Google Earth Engine asset (e.g. a Landsat image). Google Earth Engine assets are geospatial data stored in cloud databases on Google servers, are available for use in your programs, and are frequently updated - see the available data at the <a href="https://developers.google.com/earth-engine/datasets" target="_blank">Google Earth Engine data catalog</a>.</p>
+<p>The variable <code>img</code> in the code block below refers to an <code>Image</code> object on the Google servers storing Landsat 8 data. This variable can be used in your program to access, query, and analyse the Landsat data. Pass the variable <code>img</code> into the <code>print()</code> function to view the Landsat 8 <code>Image</code>'s metadata. The <code>Image</code> metadata should be printed in the <em>Console</em>. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Pass Landsat 8 image id into Image constructor*</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LC08/C02/T1_TOA/LC08_112082_20170102&#39;</span><span class="p">);</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+</span></code></pre></div>
+<p>An <code>Image</code> can have one or more bands, each band is a georeferenced raster which can have its own set of properties such as data type (e.g. Integer), scale (spatial resolution), band name, and projection. The <code>Image</code> object itself can contain metadata relevant to all bands inside a dictionary object.</p>
+<p><img alt="Schematic of an Image data structure in Google Earth Engine where an image can contain multiple georeferenced bands (source: What is Google Earth Engine?)." src="../../images/image.png" /></p>
+<p>Go to the <em>Console</em> and you should see the Landsat 8 <code>Image</code> has 17 bands. Click on a band and you should see some band specific properties such as its projection (<code>crs: EPSG:32650</code>). Click on the <code>Image</code> <code>properties</code> to explore metadata that applies to the <code>Image</code> such as cloud cover at the time of <code>Image</code> capture (<code>CLOUD_COVER: 0.01</code>) or the satellite carrying the sensor (<code>SPACECRAFT_ID: LANDSAT_8</code>).</p>
+<p>You can visualise the Landsat 8 <code>Image</code> on the map display in your browser. To do this you use the <code>Map.addLayer()</code> function to request the <code>Image</code> stored in the variable <code>img</code> on the Google servers to be displayed in your browser. The following code block will visualise an RGB composite map of the Landsat 8 data stored in <code>img</code> in your browser's display. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/* Define the visualization parameters. The bands option allows us to specify which bands to map. Here, we choose B4 (Red), B3 (Green), B2 (Blue) to make a RGB composite image.*/</span><span class="w"> </span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">vizParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nx">bands</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B2&#39;</span><span class="p">],</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">};</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1">// Centre the display and then map the image</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">vizParams</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;RGB composite&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p><img alt="Visualising Landsat 8 data as a RGB composite image." src="../../images/map-img.png" /></p>
+<h3 id="geometry-objects">Geometry Objects</h3>
+<p>The spatial location or extent of vector data is stored as <code>Geometry</code> objects. Google Earth Engine implements the <code>Geometry</code> objects outlined in the <a href="https://tools.ietf.org/html/rfc7946" target="_blank">GeoJSON spec</a>:</p>
+<ul>
+<li>Point</li>
+<li>MultiPoint</li>
+<li>LineString</li>
+<li>MultiLineString</li>
+<li>Polygon</li>
+<li>MultiPolygon</li>
+</ul>
+<p>To create a <code>Geometry</code> object programmatically use the <code>ee.Geometry.&lt;geometry type&gt;()</code> constructor (e.g. for a LineString object use <code>ee.Geometry.LineString()</code>) and pass the coordinates for the object as an argument to the constructor. Look at the code block below to observe that coordinates for a location in Kings Park are passed as arguments to the <code>ee.Geometry.Point()</code> constructor to create a point <code>Geometry</code> object (<code>locationKP</code>). </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">//location of Kings Park</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">locationKP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mf">115.831751</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.962064</span><span class="p">);</span><span class="w"> </span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">locationKP</span><span class="p">);</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1">// Display the point on the map.</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">locationKP</span><span class="p">,</span><span class="w"> </span><span class="mf">11</span><span class="p">);</span><span class="w"> </span><span class="c1">// 11 = zoom level</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">locationKP</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;FF0000&#39;</span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;Kings Park&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>If you explore the metadata for <code>locationKP</code> in the <em>Console</em> you will see the object has a <code>type</code> field which indicates the object is of <code>Point</code> type and a <code>coordinates</code> field sotring the coordinates as an array object. The value of the <code>coordinates</code> field is an ordered x y pair.</p>
+<p>You can create LineString objects in a similar way. Here, you can pass the coordinates as an array into the <code>ee.Geometry.LineString()</code> constructor. As noted in the <a href="https://tools.ietf.org/html/rfc7946" target="_blank">GeoJSON spec</a>, coordinates for LineString objects are an array of ordered x y pairs. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// May Drive as a LineString object</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">mayDr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">.</span><span class="nx">LineString</span><span class="p">(</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="p">[[</span><span class="mf">115.84063447625735</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.959551722179764</span><span class="p">],</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.8375445714722</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.957002964307144</span><span class="p">],</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.83303846032717</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.956201911510334</span><span class="p">],</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82994855554202</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.957403488085628</span><span class="p">],</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.827244888855</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.9606440253292</span><span class="p">],</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82625783593753</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.961445039381488</span><span class="p">],</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82368291528323</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.96217322791136</span><span class="p">],</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82127965600588</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.963811630990566</span><span class="p">],</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82055009515383</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.96563204456937</span><span class="p">],</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82278169305422</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.96690631259952</span><span class="p">],</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82325376184085</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.968471817682193</span><span class="p">],</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82218087823489</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.969818858827356</span><span class="p">],</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">         </span><span class="p">[</span><span class="mf">115.82222379357913</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">31.970401356984638</span><span class="p">]]);</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="nx">print</span><span class="p">(</span><span class="nx">mayDr</span><span class="p">);</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">mayDr</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;00FF00&#39;</span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;May Drive&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p><code>Geometry</code> objects in Google Earth Engine are by default geodesic (i.e. edges are the shortest path on spherical surface) as opposed to planar (edges follow the shortest path on a 2D surface). You can read more about the difference between geodesic and planar geometries <a href="https://developers.google.com/earth-engine/geometries_planar_geodesic" target="_blank">here</a>.</p>
+<p><img alt="Illustration of difference between geodesic and planar geometries (source: Google Earth Engine: Geodesic vs. Planar Geometries)." src="../../images/Geometry_geodesic_vs_planar_annotated.png" /></p>
+<p>You can also import <code>Geometry</code> objects into your scripts by manually drawing them on the map display using the <em>Geometry Tools</em>. The <em>Geometry Tools</em> are located in the upper left corner of the map display.</p>
+<p><img alt="Geometry Tools." src="../../images/geometry-tools.png" /></p>
+<p>The following video illustrates how to use the <em>Geometry Tools</em> to create a Polygon object representing Kings Park and how to use variable storing the geometry object in your script. </p>
+<p>Some things to note:</p>
+<ul>
+<li>Use the placemark icon <img alt="" src="../../images/Playground_button_placemark.png" width="5%" /> to create Point or MultiPoint objects.</li>
+<li>Use the line icon <img alt="" src="../../images/Playground_button_line.png" width="5%" /> to create Line or MultiLine objects.</li>
+<li>Use the polygon icon <img alt="" src="../../images/Playground_button_polygon.png" width="5%" /> to create Polygon or MultiPolygon objects.</li>
+<li>Use the spanner icon to configure how geometry objects that you create using <em>Geometry Tools</em> are imported into your script and styling options for display on the map.</li>
+<li>Use <b>+ new layer</b> to create new <code>Geometry</code> objects. <b>If you want to create separate <code>Geometry</code> objects for different geographic features remember to click this button before digitising a new feature</b>.</li>
+</ul>
+<center>
+
+<iframe src="https://player.vimeo.com/video/442270755" width="640" height="301" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><a href="https://vimeo.com/442270755">Geometry Tools.</a></p>
+
+</center>
+
+<h3 id="features">Features</h3>
+<p><code>Geometry</code> objects describe the position of vector data; however, there is also a need to represent attribute information about geographic entities. Vector data in Google Earth Engine which contains geometry data (representing location and shape) and attribute data are <a href="https://tools.ietf.org/html/rfc7946#page-11" target="_blank">GeoJSON <code>Feature</code> objects</a>.</p>
+<p>A <code>Feature</code> object is of type Feature with a <code>geometry</code> property which contains a <code>Geometry</code> object or <code>null</code> and a <code>properties</code> dictionary object of name:value pairs of attribute information associated with the geographic feature. </p>
+<p>Execute the code block below to convert the <code>Geometry</code> object representing Kings Park to a <code>Feature</code> object with a <code>properties</code> property which with a name attribute. Inspect the <code>Feature</code> object in the <em>Console</em>.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Create a Feature from the Geometry.</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">kpFeature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="nx">locationKP</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Kings Park&#39;</span><span class="p">});</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">kpFeature</span><span class="p">);</span>
+</span></code></pre></div>
+<p><img alt="Kings Park Feature object." src="../../images/feature.png" /></p>
+<details>
+  <summary><b>How would a <code>Feature</code> object differ if the Kings Park <code>geometry</code> property was of Polygon type rather than point? Can you convert <code>kpPoly</code> to a <code>Feature</code> object?</b></summary>
+  <p><br>The <code>geometry</code> property of the <code>Feature</code> object would contain an array object of coordinates for the outline of the Polygon. 
+
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// Create polygon Feature</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">kpPolyFeature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="nx">kpPoly</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Kings Park&#39;</span><span class="p">});</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">kpPolyFeature</span><span class="p">);</span>
+</span></code></pre></div>
+  </p>
+</details>
+
+<p>You can read more about <code>Feature</code> objects in Google Earth Engine <a href="https://developers.google.com/earth-engine/features" target="_blank">here</a>.</p>
+<h3 id="collections">Collections</h3>
+<p>Collections in Google Earth Engine comprise groups of related objects. <code>ImageCollection</code>s contain stacks of related <code>Image</code> objects and <code>FeatureCollection</code>s contain sets of related <code>Feature</code> objects. Storing objects together in a collection means that operations can be easily applied to all the objects in the collection such as sorting, filtering, summarsing, or other mathematical operations. For example, all Landsat 8 surface reflectance <code>Images</code> are stored in an <code>ImageCollection</code> with the ID <code>'LANDSAT/LC08/C02/T1_L2'</code>. You can pass this string ID into the <code>ee.ImageCollection()</code> constructor to import all Landsat 8 surface reflectance <code>Images</code> into your program. </p>
+<p>If you were creating a program to monitor land surface changes over Kings Park in 2018, you might want to import an <code>ImageCollection</code> of all Landsat 8 <code>Images</code> into your program and then filter the <code>ImageCollection</code> for Landsat 8 scenes that intersect with the extent of Kings Park and were captured in 2018. The following code block demonstrates this. You can then apply subsequent analysis or summary operations to the <code>ImageCollection</code> stored in the variable <code>l8ImCollKP</code>.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// Landsat 8 Image Collection</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">l8ImColl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LC08/C02/T1_L2&#39;</span><span class="p">);</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1">// Filter Image Collection for 2018 and Images that intersect Kings Park</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">l8ImCollKP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">l8ImColl</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">kpPoly</span><span class="p">)</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2018-12-31&#39;</span><span class="p">);</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nx">print</span><span class="p">(</span><span class="nx">l8ImCollKP</span><span class="p">);</span>
+</span></code></pre></div>
+<p>You can inspect all the <code>Images</code> in the <code>ImageCollection</code> <code>l8ImCollKP</code> in the <em>Console</em>. The ability to store spatial data in collections makes creating programs that need to access and analyse big geospatial data easier. </p>
+<p>You have already created your own <code>ImageCollection</code> that contains only the Landsat 8 <code>Images</code> for the spatial and temporal extent of interest to you (Kings Park in 2018). Now you can easily apply a range of functions and operations to all the <code>Images</code> in the <code>ImageCollection</code>. For example, you could apply a function that identifies maximum greenness observed at each pixel in 2018 to analyse spatial variability in vegetation cover. You will learn how to apply functions to <code>Images</code> in <code>ImageCollections</code> in subsequent labs.</p>
+<p><img alt="ImageCollection of all Landsat 8 scenes that intersect with Kings Park in 2018." src="../../images/im-coll-kp.png" /></p>
+<p>You can find more information on <code>ImageCollection</code>s <a href="https://developers.google.com/earth-engine/ic_creating" target="_blank">here</a> and <code>FeatureCollection</code>s <a href="https://developers.google.com/earth-engine/feature_collections" target="_blank">here</a>.</p>
+<details>
+  <summary><b>How would you represent multiple weather stations and observations recorded at these stations as a <code>FeatureCollection</code>?</b></summary>
+  <p><br>Each weather station would be a <code>Feature</code> object in the <code>FeatureCollection</code>. Each weather station <code>Feature</code> would have a <code>geometry</code> property containing a Point <code>Geometry</code> object representing the location of the station and a <code>properties</code> property containing objects of name:value pairs of weather observations for a given day. 
+
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// Example structure of weather stations Feature Collection</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">{</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;FeatureCollection&quot;</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="s2">&quot;features&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">      </span><span class="s2">&quot;station-id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">XXXX</span><span class="p">,</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="s2">&quot;date&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;01-01-2018&quot;</span><span class="p">,</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">      </span><span class="s2">&quot;temperature&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">29</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="s2">&quot;geometry&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Point&quot;</span><span class="p">,</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">      </span><span class="s2">&quot;coordinates&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="mf">119.17968749999999</span><span class="p">,</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="o">-</span><span class="mf">26.74561038219901</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">      </span><span class="p">]</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">      </span><span class="s2">&quot;station-id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">XXXX</span><span class="p">,</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">      </span><span class="s2">&quot;date&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;02-01-2018&quot;</span><span class="p">,</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">      </span><span class="s2">&quot;temperature&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">27</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">      </span><span class="p">},</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">    </span><span class="s2">&quot;geometry&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Point&quot;</span><span class="p">,</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">      </span><span class="s2">&quot;coordinates&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">        </span><span class="mf">124.1015625</span><span class="p">,</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">        </span><span class="o">-</span><span class="mf">29.535229562948455</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">      </span><span class="p">]</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="p">]</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="p">}</span>
+</span></code></pre></div>
+
+</p>
+</details>
+
+<details>
+  <summary><b>1. Can you use the Geometry Tools to create a LineString <code>Geometry</code> object representing a road? and 2. can you convert the LineString <code>Geometry</code> object to a <code>Feature</code> object by giving it a <code>road_name</code> property?</b></summary>
+  <p>
+  <center>
+  <iframe src="https://player.vimeo.com/video/442389572" width="640" height="303" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><a href="https://vimeo.com/442389572">Create a LineString <code>Geometry</code> object to represent a road and create a <code>Feature</code> object with a <code>road_name</code> property.</a></p>
+</center>
+  </p>
+</details>
+
+<hr>
+
+<p>Point <img alt="" src="../../images/Playground_button_placemark.png" width="5%" />, Line <img alt="" src="../../images/Playground_button_line.png" width="5%" />, and Polygon <img alt="" src="../../images/Playground_button_polygon.png" width="5%" /> marker symbols obtained from <a href="https://developers.google.com/earth-engine/playground#geometry-tools">Google Earth Engine Developers Guide</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

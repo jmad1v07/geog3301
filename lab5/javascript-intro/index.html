@@ -1,0 +1,1074 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../gee-101/">
+      
+      
+        <link rel="next" href="../spatial-data-in-gee/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>JavaScript Intro - GEOG3301 GEE Labs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#javascript-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-header__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GEOG3301 GEE Labs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              JavaScript Intro
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-nav__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GEOG3301 GEE Labs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lab 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gee-101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GEE 101
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript Intro
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Editor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-and-code-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syntax and Code Style
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spatial-data-in-gee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial data in GEE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spatial-data-visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial data visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Editor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-and-code-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syntax and Code Style
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="javascript-introduction">JavaScript Introduction</h1>
+<h2 id="introduction">Introduction</h2>
+<p>You will be using Google Earth Engine to perform geospatial data analysis. Google Earth Engine programs comprise a series of statements written in a programming language (JavaScript or Python) that outline steps taken to perform specific tasks using geospatial data. </p>
+<p>This lab is an introduction to programming using JavaScript. It introduces key concepts that are important to understand when using Google Earth Engine. However, also view this section as a <em>reference resource</em> to refer back to as you work through the labs and become more proficient in using Google Earth Engine. </p>
+<h2 id="setup">Setup</h2>
+<p>Load the Google Earth Engine code editor in your browser via the URL: <a href="https://code.earthengine.google.com/" target="_blank">https://code.earthengine.google.com/</a>.</p>
+<h3 id="code-editor">Code Editor</h3>
+<p>You will create Google Earth Engine programs using the code editor. The code editor is a web-based interactive development environment (IDE) which provides access to the Google Earth Engine JavaScript API. The Google Earth Engine <a href="https://developers.google.com/earth-engine/playground" target="_blank">Developers Guide</a> provides an overview of the code editor tools. </p>
+<p>The code editor provides a range of tools for geospatial data analysis and visualisation. Some key code editor features include:</p>
+<ul>
+<li><strong>code editor</strong>: where you write JavaScript statements.</li>
+<li><strong>Scripts tab</strong>: save the JavaScript code for your Google Earth Engine programs.</li>
+<li><strong>Map</strong>: web map to visualise spatial data.</li>
+<li><strong>Docs</strong>: JavaScript API reference - lists all the in-built functions and operations.</li>
+<li><strong>Console</strong>: print results from analysis and metadata.</li>
+<li><strong>Inspector tab</strong>: interactive query of spatial objects on the map.</li>
+<li><strong>Geometry tools</strong>: digitise vector features.</li>
+<li><strong>Run</strong>: Run your script.</li>
+</ul>
+<p><img alt="Google Earth Engine code editor (source: Google Earth Engine Developers Guide)." src="../../images/Code_editor_diagram.png" /></p>
+<h3 id="create-a-repository">Create a Repository</h3>
+<p>Create a repository called <em>labs-gee/lab-5</em> where you will store the scripts containing the code for programs you write in the labs. Go to the <em>Scripts</em> tab and click the <img alt="" src="../../images/Script_manager_new_button.png" width="7%" /> button to create a new <em>labs-gee</em> repository. </p>
+<p><img alt="Scripts tab and button to create new repositories (source: Google Earth Engine Developers Guide)." src="../../images/Playground_scripts.png" /></p>
+<p>Enter the following code into the <em>Code Editor</em> and save the script to your <em>labs-gee</em> repository. Name the script <em>js-intro.js</em>. This code are comments that define what the script does and who wrote it and when. Replace the author name and date as appropriate. Comments are not executed when your program runs. <strong>Under path in the save widget make sure you select the correct repository (i.e. not default)</strong>.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">/*</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cm">JavsScript Introduction</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cm">Author: Test</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="cm">Date: XX-XX-XXXX</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="cm">*/</span>
+</span></code></pre></div>
+<p><img alt="Save script to labs-gee repository." src="../../images/save-js-intro-script-v1.png" /></p>
+<h2 id="programming">Programming</h2>
+<p>Programming (coding) is the creation of source code for programs that run on computers. You will be writing programs using <a href="https://developers.google.com/earth-engine/tutorial_js_01" target="_blank">JavaScript</a>. </p>
+<h3 id="data-types">Data Types</h3>
+<p>Programs need data to work with, perform operations on, and to return outputs from computation and analysis. Geographic and non-geographic entities are represented in computer programs as data of specific types. In JavaScript there are seven primitive data types:</p>
+<ul>
+<li>undefined</li>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>BigInt</li>
+<li>Symbol </li>
+<li>null</li>
+</ul>
+<p>undefined types are variables that have not been assigned a value. Variables of null data type intentionally have no value. </p>
+<p>All other data types in JavaScript are of type object.</p>
+<p><strong>Strings</strong></p>
+<p>Variables of string data type contain characters and text which are surrounded by single <code>'</code> or double <code>"</code> quotes. There are several cases where string variables are used when working with geospatial data; for example, in the metadata of satellite images the name of the sensor used to collect an image could be stored as a string. </p>
+<details>
+  <summary><b>What other geospatial data could be stored as a string data type?</b></summary>
+  <p><br>Anything that needs to be represented as text data such as place names, road names, names of weather stations.</p>
+</details>
+
+<p>Enter the following command into the code editor to create a string variable.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">stringVar</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="p">;</span>
+</span></code></pre></div>
+<p>You have created a string variable called <code>stringVar</code> which contains the text information 'Hello World!'. This is data that you can use in your program. </p>
+<p>You can use the <code>print()</code> function to print the data in <code>stringVar</code> onto the <em>Console</em> for inspection. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">print</span><span class="p">(</span><span class="nx">stringVar</span><span class="p">);</span>
+</span></code></pre></div>
+<p>You should see 'Hello World!' displayed in the <em>Console</em>. You have just written a simple program that creates a string object storing text data in a variable named <code>stringVar</code> and prints this text data to a display. </p>
+<p>In reality, programs that perform geospatial data analysis will be more complex, contain many variables of different data types, and perform more operations than printing values to a display (instead of printing results to the <em>Console</em> a GIS program might write a <em>.tif</em> file containing the raster output from some analysis). </p>
+<p><strong>Numbers</strong></p>
+<p>The number data type in JavaScript is in double precision 64 bit floating point format. Add the following code to your script to make two number variables.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nx">print</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Storing numbers in variables enables programs to perform mathematical and statistical operations and represent geographic entities using quantitative values. For example, spectral reflectance values in remote sensing images are numeric which can be combined mathematically to compute vegetation indices (e.g. NDVI). </p>
+<p>Execute the following code to perform some basic maths with the variables <code>x</code> and <code>y</code>.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+</span></code></pre></div>
+<details>
+  <summary><b>What numeric value do you think variable <code>z</code> will contain? How could you check if the variable <code>z</code> contains the correct value?</b></summary>
+  <p><br>3<br> <code>print(z);</code></p>
+</details>
+
+<p><strong>Boolean</strong></p>
+<p>The Boolean data type is used to store true or false values. This is useful for storing the results of comparison (equal to, greater than, less than) and logical (and, or, not) operations.  </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">demoBool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">4</span><span class="p">;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nx">print</span><span class="p">(</span><span class="nx">demoBool</span><span class="p">);</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">bool1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="kd">var</span><span class="w"> </span><span class="nx">bool2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+</span></code></pre></div>
+<p>You can read up on JavaScript logical and comparison operators <a href="https://www.w3schools.com/js/js_comparisons.asp" target="_blank">here</a> or look at the table below. </p>
+<details>
+  <summary><b>What do you think the value of <code>bool1</code> and <code>bool2</code> will be?</b></summary>
+  <p><br><code>bool1</code>: true <br> <code>bool2</code>: false</p>
+</details>
+
+<table style="width:75%; border-collapse: collapse; border-bottom: 1px solid #ddd; padding: 15px;">
+  <caption>JavaScript comparison and logical operators</caption>
+  <tr>
+    <th>Operator</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td><code>==</code></td>
+    <td>equal to</td>
+    <td><code>x == 5</code></td>
+  </tr>
+  <tr>
+    <td><code>!=</code></td>
+    <td>not equal</td>
+    <td><code>x != 5</code></td>
+  </tr>
+   <tr>
+    <td><code>&gt;</code></td>
+    <td>greater than</td>
+    <td><code>x &gt; 5</code></td>
+  </tr>
+  <tr>
+    <td><code>&lt;</code></td>
+    <td>less than</td>
+    <td><code>x &lt; 5</code></td>
+  </tr>
+  <tr>
+    <td><code>&gt;=</code></td>
+    <td>greater than or equal to</td>
+    <td><code>x &gt;= 5</code></td>
+  </tr>
+  <tr>
+    <td><code>&lt;=</code></td>
+    <td>less than or equal to</td>
+    <td><code>x &lt;= 5</code></td>
+  </tr>
+  <tr>
+    <td><code>&amp;&amp;</code></td>
+    <td>and</td>
+    <td><code>x == 5 &amp;&amp; y == 4</code></td>
+  </tr>
+  <tr>
+    <td><code>||</code></td>
+    <td>or</td>
+    <td><code>x == 5 || y == 5</code></td>
+  </tr>
+  <tr>
+    <td><code>!</code></td>
+    <td>not</td>
+    <td><code>!(x &lt;= 5)</code></td>
+  </tr>
+</table>
+
+<p><strong>Objects</strong></p>
+<p>An object in JavaScript is a collection of properties where each property is a name:value pair and the value can be any primitive data type (e.g. String, Number, Boolean, null) or a type of object. You could create an object to represent a point with two name:value pairs: <code>longitude: 25.55</code> and <code>latitude: 23.42</code> where the values are number type coordinates. </p>
+<p>You can access properties of an object using the dot operator: <code>.</code> with the format <code>&lt;object name&gt;.&lt;property name&gt;</code>.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">lon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">25.55</span><span class="p">;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">23.42</span><span class="p">;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">// create an object named point</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="nx">longitude</span><span class="o">:</span><span class="w"> </span><span class="nx">lon</span><span class="p">,</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="nx">latitude</span><span class="o">:</span><span class="w"> </span><span class="nx">lat</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">};</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nx">print</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1">// access value in object</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nx">print</span><span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">longitude</span><span class="p">);</span>
+</span></code></pre></div>
+<p><strong>Arrays</strong></p>
+<p>Arrays are a special list-like object that store an ordered collection of elements. Arrays are declared by placing values in square brackets <code>[1, 2, 3]</code> and you access values inside an array using the value's array index. The first value in an array has an index of 0, the second value has an index of 1, and the final value has an index of $n-1$ where $n$ is the number of elements in the array. This is the distinction between arrays and objects where elements are represented by name:value pairs. The elements in arrays are ordered and accessed by their index position and the elements in objects are unordered and accessed by their property name. </p>
+<p>Below is an example of how to create an array of numbers that represent years.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">2000</span><span class="p">,</span><span class="w"> </span><span class="mf">2001</span><span class="p">,</span><span class="w"> </span><span class="mf">2002</span><span class="p">,</span><span class="w"> </span><span class="mf">2003</span><span class="p">,</span><span class="w"> </span><span class="mf">2004</span><span class="p">,</span><span class="w"> </span><span class="mf">2005</span><span class="p">,</span><span class="w"> </span><span class="mf">2006</span><span class="p">];</span>
+</span></code></pre></div>
+<p>You can see the data inside arrays using the <code>print()</code> command or extract information from arrays using square brackets <code>[]</code> and the index of the element. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">print</span><span class="p">(</span><span class="nx">years</span><span class="p">);</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">year0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">years</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">year0</span><span class="p">);</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">year1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">years</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nx">print</span><span class="p">(</span><span class="nx">year1</span><span class="p">);</span>
+</span></code></pre></div>
+<p>You can also put strings inside arrays.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">stringList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;am&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;in&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;list&#39;</span><span class="p">];</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nx">print</span><span class="p">(</span><span class="nx">stringList</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Remember, each item in an array is separated by a comma. You can create n-Dimensional arrays. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">squareArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="p">[</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">],</span><span class="w"> </span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="p">[</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">]</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">];</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nx">print</span><span class="p">(</span><span class="nx">squareArray</span><span class="p">);</span>
+</span></code></pre></div>
+<details>
+  <summary><b>What kind of geospatial data is well suited to being represented using arrays?</b></summary>
+  <p><br>raster data (grids of pixels with each pixel assigned a value).</p>
+</details>
+
+<h3 id="variables">Variables</h3>
+<p>Variables are named containers that store data. </p>
+<p>To create a variable you need to declare it using the <strong><code>var</code></strong> keyword. Once a variable is declared you can put data inside it and use that variable, and therefore the data it references, in your program. You assign data to a variable using the assignment operator <code>=</code>.</p>
+<p>The code block below declares a variable <code>temp</code> and then assigns the value <code>25</code> to this variable. As demonstrated by the variable <code>temp1</code> you can declare a variable and assign values to it in one statement. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">temp</span><span class="p">;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nx">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">25</span><span class="p">;</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">temp1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">26</span><span class="p">;</span>
+</span></code></pre></div>
+<p>Using variables makes code easier to organise and write. For example, if you want to perform multiple operations on temperature data you can refer to the data using the variable name as opposed to either writing out the temperature values or reading them from a file separately for each operation. You can use variables in operations and functions too: </p>
+<p><br></p>
+<details>
+  <summary><b>What value do you think the variable</b> <code>tempDiff</code> <b>would store after executing this statement:</b> <code>var tempDiff = temp1 - temp;</code><b>?</b></summary>
+  <p><br>1 <br> <code>print(tempDiff);</code>.</p>
+</details>
+<p><br></p>
+<p>You only need to declare a variable once. <strong><code>var</code></strong> is a reserved keyword; this means a variable cannot be named <strong><code>var</code></strong>. Other reserved keywords in JavaScript include <strong><code>class</code></strong>, <strong><code>function</code></strong>, <strong><code>let</code></strong>, and <strong><code>return</code></strong> with a full list <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords" target="_blank">here</a>.</p>
+<h3 id="object-data-model">Object Data Model</h3>
+<p>Except for the seven primitive data types, everything in JavaScript is an object. An object is a programming concept where each object can have properties which describe attributes of the object and methods which are operations or tasks that can be performed. </p>
+<p>Real world phenomenon or entities can be represented as objects. For example, you can define an object called <code>field</code> to represent data about fields. The <code>field</code> object can have a numeric array property storing the vertices representing the field's location, a crop type string property stating what crops are grown in the field, and a numeric type property stating crop yield. The <code>field</code> object could have a <code>computeArea()</code> method which would calculate and return the area of the field. The <code>field</code> object is a spatial object so it could also have methods such as <code>intersects()</code> which would return spatial objects whose extent intersects with the field. </p>
+<p>An object definition which outlines the properties and methods associated with an object is called a class. You can create multiple objects of the same class in your program.  </p>
+<h3 id="functions">Functions</h3>
+<p>There are many methods and operations already defined in JavaScript. However, there will be cases where you need to create your own operation to perform a task as part of your program. User-defined functions fill this role. First, you declare or define your function which consists of:</p>
+<ul>
+<li>The <code>function</code> keyword.</li>
+<li>The name of the function.</li>
+<li>The list of parameters the function takes in separated by commas and enclosed in parentheses (e.g. <code>function subtraction(number1, number2)</code>).</li>
+<li>A list of statements that perform the function tasks enclosed in braces <code>{ }</code>. </li>
+<li>A <code>return</code> statement that specifies what data is returned by a call to the function.</li>
+</ul>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// substraction function</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1">//function declaration</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="kd">function</span><span class="w"> </span><span class="nx">subtraction</span><span class="p">(</span><span class="nx">number1</span><span class="p">,</span><span class="w"> </span><span class="nx">number2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">number1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">number2</span><span class="p">;</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">diff</span><span class="p">;</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Once a function has been declared you can call it from within your program. For example, you can call the function <code>subtraction</code> declared above and pass the two numeric variables <code>temp</code> and <code>temp1</code> into it as arguments. This will return the difference between the numeric values stored in <code>temp</code> and <code>temp1</code>. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// use subtraction function</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">tempFuncDiff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">subtraction</span><span class="p">(</span><span class="nx">temp</span><span class="p">,</span><span class="w"> </span><span class="nx">temp1</span><span class="p">);</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nx">print</span><span class="p">(</span><span class="nx">tempFuncDiff</span><span class="p">);</span>
+</span></code></pre></div>
+<p>You should see the result -1 printed in the <em>Console</em>. </p>
+<p>This is a very simple example of how to declare and use a function. However, creating your own functions is one of the key advantages of programming. You can flexibly combine functions together to create complex workflows. </p>
+<p>The following example declares and calls a function <code>convertTempToK</code> that takes in a temperature value in degrees centigrade as a parameter and returns the temperature in Kelvin. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">// temperature conversion function</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kd">function</span><span class="w"> </span><span class="nx">convertTempToK</span><span class="p">(</span><span class="nx">tempIn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">tempK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tempIn</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mf">273.15</span><span class="p">);</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">tempK</span><span class="p">;</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">}</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="kd">var</span><span class="w"> </span><span class="nx">tempInK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">convertTempToK</span><span class="p">(</span><span class="nx">temp</span><span class="p">);</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="nx">print</span><span class="p">(</span><span class="nx">tempInK</span><span class="p">);</span>
+</span></code></pre></div>
+<h3 id="syntax-and-code-style">Syntax and Code Style</h3>
+<p>There are various syntax rules that need to be followed when writing JavaScript statements. If these rules are not followed your code will not execute and you'll get a syntax error. </p>
+<p>As you see and write JavaScript programs, syntax and style will become apparent. This is not something you need to get right first time but is part of the process of learning to write your own programs. Error messages when you run your program will alert you to where there are syntax errors so you can fix them. </p>
+<p>Some important syntax rules:</p>
+<ul>
+<li>Strings are enclosed within <code>"</code> or <code>'</code> quotes.</li>
+<li>Hyphen <code>-</code> cannot be used except as the subtraction operator (i.e. <code>perth-airport</code> is <strong>not</strong> valid).</li>
+<li>JavaScript identifiers are used to identify variables or functions. Identifiers are case sensitive and can only start with a letter, underscore (<code>_</code>), or dollar sign (<code>$</code>).</li>
+<li>Identifiers cannot start with a number.</li>
+<li>Variables need to be declared with the <strong><code>var</code></strong> keyword before they are used.</li>
+<li>Keywords (e.g. <strong><code>var</code></strong>) are reserved and cannot be used as variable or function names.</li>
+</ul>
+<p><b>Code Style</b></p>
+<p>Alongside syntax rules, there are stylistic recommendations for writing JavaScript. These are best adhered to as they'll make your code easier for you, future you, or somebody else to read. This is important if you require help debugging a script. </p>
+<p>Some common style tips:</p>
+<ul>
+<li>Use camel case for variables - first word is lower case and all other words start with an upper case letter with no spaces between words (e.g. <code>camelCase</code>, <code>perthAirport</code>).</li>
+<li>Finish each statement with a semi-colon <code>var x = 23;</code>.</li>
+<li>At most, one statement per line (a statement can span multiple lines if required or improves readability). </li>
+<li>Consistency in code style throughout your script. </li>
+<li>Indent each block of code with two spaces.</li>
+<li>Sensible and logical variable names - variable names should be nouns and describe the variable.</li>
+<li>Sensible and logical function names - function names should be verbs that describe what the function does. </li>
+<li>Keep variable and function names short to avoid typos.</li>
+<li>One variable declaration per line.</li>
+</ul>
+<p>The Google <a href="https://google.github.io/styleguide/jsguide.html" target="_blank">JavaScript style guide</a> is a useful resource for writing clear JavaScript programs. </p>
+<p><strong>Comments</strong></p>
+<p>You can write text in your script that is not executed by the computer. These are comments and are useful to describe what parts of your script are doing. In general, you should aspire to write your code so that it is legible and easy to follow. However, comments augment good code, can help explain how a program works, and are useful to someone else using your script or to future you if you return to working on it. </p>
+<p>Some useful things to comment:</p>
+<ul>
+<li>Start the script with brief description of what it does.</li>
+<li>Author and date of script.</li>
+<li>Outline any data or other programs the script depends on. </li>
+<li>Outline what data or results are returned by the script.</li>
+<li>Avoid commenting things which are outlined in documentation elsewhere (e.g. Google Earth Engine documentation).</li>
+<li>Outline what arguments (and type) a function takes and returns. </li>
+</ul>
+<p>Lines of code can be commented using <code>//</code> or <code>/* .... */</code>. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="cm">/*</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="cm">Script declares variables to store latitude and longitude values.</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="cm">Author: XXXXX</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="cm">Date: 01/02/0304</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="cm">*/</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1">// longitude</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="kd">var</span><span class="w"> </span><span class="nx">lon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">25.55</span><span class="p">;</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1">// latitude</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="kd">var</span><span class="w"> </span><span class="nx">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">23.42</span><span class="p">;</span>
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
