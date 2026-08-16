@@ -8,7 +8,7 @@ A series of questions are posed throughout the lab as demonstrated below; these 
 
 
 <details>
-  <summary><b>*Example Question?*</b></summary>
+  <summary><b>Example Question?</b></summary>
   <p><br>Answer.</p>
 </details>
 
