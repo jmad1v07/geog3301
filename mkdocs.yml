@@ -8,6 +8,8 @@ theme:
 markdown_extensions:
   - attr_list
   - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -15,6 +17,13 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Home: index.md
@@ -22,3 +31,6 @@ nav:
       - JavaScript Intro: lab5/javascript-intro.md
       - Spatial data in GEE: lab5/spatial-data-in-gee.md
       - Spatial data visualisation: lab5/spatial-data-visualisation.md
+  - Lab 6:
+      - Raster data operations: lab6/raster-data-operations-in-gee.md
+      - Vector data operations: lab6/vector-data-operations-in-gee.md
