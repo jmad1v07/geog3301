@@ -268,7 +268,7 @@ You have gone through the process of masking out cloudy pixels from a single Lan
 // Function to mask clouds based on the QA_PIXEL band of Landsat data.
 function cloudMaskFunc(image) {
   var cloudMask = image.select('QA_PIXEL').bitwiseAnd(parseInt('11111', 2)).eq(0);
-  return image.updateMask(mask);
+  return image.updateMask(cloudMask);
 }
 ```
 
