@@ -34,3 +34,7 @@ nav:
   - Lab 6:
       - Raster data operations: lab6/raster-data-operations-in-gee.md
       - Vector data operations: lab6/vector-data-operations-in-gee.md
+  - Lab 7:
+      - Remote sensing of vegetation skills: lab7/vegetation-skills.md
+      - Interpreting vegetation indices: lab7/vegetation-indices.md
+      - WA deforestation drivers: lab7/wa-deforestation-drivers.md      
