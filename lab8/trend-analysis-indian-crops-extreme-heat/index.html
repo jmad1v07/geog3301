@@ -1,0 +1,1222 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../change-detection-gee-book/">
+      
+      
+        <link rel="next" href="../australian-bushfires-time-series-intro/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Trend analysis - Extreme heat over Indian croplands - GEOG3301 GEE Labs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#extreme-heat-over-indias-croplands-trend-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-header__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GEOG3301 GEE Labs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Trend analysis - Extreme heat over Indian croplands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-nav__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GEOG3301 GEE Labs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 5
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lab 5
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab5/javascript-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab5/spatial-data-in-gee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial data in GEE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab5/spatial-data-visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial data visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 6
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lab 6
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab6/raster-data-operations-in-gee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Raster data operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab6/vector-data-operations-in-gee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector data operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 7
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lab 7
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab7/vegetation-skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remote sensing of vegetation skills
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab7/vegetation-indices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interpreting vegetation indices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab7/wa-deforestation-drivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WA deforestation drivers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 8
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lab 8
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../change-detection-gee-book/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trend analysis - Extreme heat over Indian croplands
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trend analysis - Extreme heat over Indian croplands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping-peak-wheat-growing-season" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping peak wheat growing season
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trend-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trend analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../australian-bushfires-time-series-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-series skills - Australian Bushfires
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping-peak-wheat-growing-season" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping peak wheat growing season
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trend-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trend analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="extreme-heat-over-indias-croplands-trend-analysis">Extreme heat over India's croplands - trend analysis</h1>
+<p>India's North-West Indo-Gangetic Plains are a key food producing region typified by a rice (kharif / wet season) and wheat (rabi / dry season) cropping system. At the same time, these cropping systems are threatened by a range of climatic stressors.  In a <a href="https://www.nature.com/articles/nclimate1356" target="_blank">2012 <em>Nature Climate Change</em> study Lobell et al.,</a> showed that increased exposure to extreme heat during the grain filling period of wheat crop growth accelerated crop senescence and harms crop yields. A recent analysis by <a href="https://iopscience.iop.org/article/10.1088/1748-9326/acf871/pdf" target="_blank">Singh Sidhu (2023)</a> documented the effect of the 2022 heat waves during the grain filling phase on North-West India's wheat crop. </p>
+<p>This lab builds on Lobell et al., 2012's work and combines time-series of remote sensing data with daily global climate data to map trends in India's wheat crop extreme heat exposure during key growth stages. For all cropland pixels, time-series of vegetation indices (VI) will be used to identify the peak of the wheat crop's growing season and proxy the grain filling stage as the 45 days post-peak VI for each year. Then, an indicator of extreme heat exposure during each pixel-year combination's grain filling period will be computed using daily global climate data. Finally, annual trends in the exposure of wheat crops to extreme heat at this key growth stage will mapped over a 20 year period.</p>
+<p>In this lab you will:</p>
+<ul>
+<li>extract phenology parameters from time-series of vegetation indices.</li>
+<li>map phenology parameters for multiple years across large regions.</li>
+<li>combine remotely sensed vegetation data with climate data. </li>
+<li>map temporal trends in agriculturally-relevant climate metrics. </li>
+</ul>
+<h3 id="setup">Setup</h3>
+<p>Create a new script in your <em>labs-gee/lab-8</em> repository called <em>indian-wheat-extreme-heat-trends.js</em>. Enter the following comment header to the script. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">/*</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cm">Indian wheat extreme heat trends</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cm">Author: Test</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="cm">Date: XX-XX-XXXX</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="cm">*/</span>
+</span></code></pre></div>
+<p>The assessment area for this lab will be croplands in two Indian states comprising the North-West Indo-Gangetic Plain: Haryana and Uttar Pradesh. Extract the boundaries for these states and centre the map on their location. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">aoi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;FAO/GAUL/2015/level1&#39;</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM0_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;India&#39;</span><span class="p">))</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">inList</span><span class="p">(</span><span class="s1">&#39;ADM1_NAME&#39;</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="p">[</span><span class="s1">&#39;Punjab&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Haryana&#39;</span><span class="p">]))</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="p">.</span><span class="nx">geometry</span><span class="p">();</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">aoi</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">);</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">aoi</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;black&#39;</span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;AOI&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Also set some config variables for this analysis.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Config</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">startYear</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">2001</span><span class="p">;</span><span class="w">   </span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">endYear</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mf">2025</span><span class="p">;</span><span class="w">   </span><span class="c1">// last complete season </span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">EDD_THRESH</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mf">30</span><span class="p">;</span><span class="w">     </span><span class="c1">// EDD temperature threshold, deg C</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">WINDOW_DAYS</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">45</span><span class="p">;</span><span class="w">     </span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kd">var</span><span class="w"> </span><span class="nx">VI_BAND</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;NDVI&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// &#39;NDVI&#39; or &#39;EVI&#39; from MOD13Q1</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="kd">var</span><span class="w"> </span><span class="nx">USE_CROPMASK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">   </span><span class="c1">// restrict outputs to cropland (ESA WorldCover)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="kd">var</span><span class="w"> </span><span class="nx">EXAMPLE_YEAR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2015</span><span class="p">;</span><span class="w">   </span><span class="c1">// a single season to visualise peak-VI timing</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">// Season for harvest-year Y = sown Nov (Y-1) -&gt; harvested Apr (Y).</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="kd">var</span><span class="w"> </span><span class="nx">SEASON_START_MONTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">11</span><span class="p">;</span><span class="w"> </span><span class="c1">// November of year (Y-1)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="kd">var</span><span class="w"> </span><span class="nx">SEASON_END_MONTH</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mf">4</span><span class="p">;</span><span class="w">  </span><span class="c1">// April of year (Y)</span>
+</span></code></pre></div>
+<p>And, load the required datasets. The <a href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13Q1" target="_blank">MODIS MOD13Q1 product</a> has a 16 day temporal resolution, a 250 m spatial resolution and provides NDVI and EVI bands. The <a href="https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_DAILY_AGGR#description" target="_blank">ERA5-Land Daily Aggregated</a> dataset is a daily climate reanalysis product with an approximate 11 km spatial resolution. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// MODIS/Terra Vegetation Indices, 250 m, 16-day (Collection 6.1).</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">MOD13</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;MODIS/061/MOD13Q1&#39;</span><span class="p">).</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">aoi</span><span class="p">);</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">// ERA5-Land daily aggregates (~11 km); 2 m air temperature in KELVIN.</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">ERA5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;ECMWF/ERA5_LAND/DAILY_AGGR&#39;</span><span class="p">);</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1">// Optional static cropland mask: ESA WorldCover v200, class 40 = Cropland.</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="kd">var</span><span class="w"> </span><span class="nx">cropMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;ESA/WorldCover/v200&#39;</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">eq</span><span class="p">(</span><span class="mf">40</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="functions">Functions</h2>
+<p>One of the core approaches to working with spatio-temporal data in Google Earth Engine is mapping a function over an <code>ImageCollection</code> and performing analysis on <code>Image</code>s within temporal slices. The analysis operations are defined by the function. </p>
+<p>The following function can be mapped over an <code>ImageCollection</code> of MODIS MOD13Q1 <code>Image</code>s to identify the peak VI value and date of peak VI value per-pixel. Specifically, how this function works is:</p>
+<ol>
+<li>for each year, extract all MODIS MOD13Q1 <code>Image</code>s that intesect the wheat growing season. </li>
+<li>for each <code>Image</code>, append a band for the day of year (that is what the variable <code>t</code> references).</li>
+<li>return an <code>Image</code> with two bands: an NDVI value and a day of year.</li>
+<li>apply the <code>qualityMosaic()</code> function to find the highest value per-pixel in an <code>ImageCollection</code>. This also carries through the day of year band so the <code>Image</code> that is returned contains a pixel-wise band for peak NDVI and a pixel-wise band for the date of peak NDVI. </li>
+</ol>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Map peak wheat growing season VI</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">function</span><span class="w"> </span><span class="nx">seasonPeak</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Number</span><span class="p">(</span><span class="nx">Y</span><span class="p">);</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">fromYMD</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="nx">SEASON_START_MONTH</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">end</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">fromYMD</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="w"> </span><span class="nx">SEASON_END_MONTH</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">MOD13</span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">end</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">vi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">VI_BAND</span><span class="p">).</span><span class="nx">multiply</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;VImax&#39;</span><span class="p">);</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="c1">// composite start + 8 days ~= composite centre</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">constant</span><span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">advance</span><span class="p">(</span><span class="mf">8</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;day&#39;</span><span class="p">).</span><span class="nx">millis</span><span class="p">())</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">              </span><span class="p">.</span><span class="nx">toDouble</span><span class="p">().</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;peakMillis&#39;</span><span class="p">)</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">              </span><span class="p">.</span><span class="nx">updateMask</span><span class="p">(</span><span class="nx">vi</span><span class="p">.</span><span class="nx">mask</span><span class="p">());</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">vi</span><span class="p">.</span><span class="nx">addBands</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nx">clip</span><span class="p">(</span><span class="nx">aoi</span><span class="p">);</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span><span class="c1">// qualityMosaic picks, per pixel, the bands from the image with the highest</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span><span class="c1">// &#39;VImax&#39;  -&gt;  gives both the peak value and the time it occurred.</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">stack</span><span class="p">.</span><span class="nx">qualityMosaic</span><span class="p">(</span><span class="s1">&#39;VImax&#39;</span><span class="p">);</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The next two functions compute the extreme heat metrics per-pixel in the temporal window following peak VI which corresponds to grain filling. </p>
+<p><code>dailyTmaxExceedance(tmax, thr)</code> computes the extreme heat metric - a version of extreme degree days. Here, it sets a value of 0 to a daily max temperature of 30<sup>o</sup>C, a value of 1 to 31<sup>o</sup>C, a value of 2 to 32<sup>o</sup>C and so on.</p>
+<p>The <code>seasonEDD()</code> function is more involved. It takes in a year and then calls the <code>seasonPeak()</code> function to get a map of peak wheat growing season NDVI for the year and the dates of peak NDVI. Then it iterates over each day within the wheat growing season, extracts the <code>temperature_2m_max</code> band, which is 2 m air temperature, computes the extreme heat metric, and then checks to see if the day in question falls within a pixel's grain filling period. Finally, it sums the extreme heat metric over the grain filling period to give a single number representing the cumulative extreme heat stress the crop was exposed to. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">dailyTmaxExceedance</span><span class="p">(</span><span class="nx">tmax</span><span class="p">,</span><span class="w"> </span><span class="nx">thr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">tmax</span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">thr</span><span class="p">).</span><span class="nx">max</span><span class="p">(</span><span class="mf">0</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;EDD&#39;</span><span class="p">);</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kd">function</span><span class="w"> </span><span class="nx">seasonEDD</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nx">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Number</span><span class="p">(</span><span class="nx">Y</span><span class="p">);</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">peakMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">seasonPeak</span><span class="p">(</span><span class="nx">Y</span><span class="p">).</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;peakMillis&#39;</span><span class="p">);</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">winMillis</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Number</span><span class="p">(</span><span class="nx">WINDOW_DAYS</span><span class="p">).</span><span class="nx">multiply</span><span class="p">(</span><span class="mf">86400</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="c1">// Bracket all possible per-pixel windows. Peaks span ~mid-Jan to late Mar and</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="c1">// the window runs forward WINDOW_DAYS, so a late peak + 45 d reaches mid-May.</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">eStart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">fromYMD</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="mf">12</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">eEnd</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">fromYMD</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">31</span><span class="p">);</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">eddDaily</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ERA5</span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">eStart</span><span class="p">,</span><span class="w"> </span><span class="nx">eEnd</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">day</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">tmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">day</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;temperature_2m_max&#39;</span><span class="p">).</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">273.15</span><span class="p">);</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">edd</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nx">dailyTmaxExceedance</span><span class="p">(</span><span class="nx">tmax</span><span class="p">,</span><span class="w"> </span><span class="nx">EDD_THRESH</span><span class="p">);</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="c1">// Keep the day only if it falls in [peak, peak + WINDOW_DAYS].</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">dayMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">constant</span><span class="p">(</span><span class="nx">day</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">millis</span><span class="p">()).</span><span class="nx">toDouble</span><span class="p">();</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">sincePeak</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dayMillis</span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">peakMillis</span><span class="p">);</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">inWindow</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nx">sincePeak</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="mf">0</span><span class="p">).</span><span class="nx">and</span><span class="p">(</span><span class="nx">sincePeak</span><span class="p">.</span><span class="nx">lte</span><span class="p">(</span><span class="nx">winMillis</span><span class="p">));</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">edd</span><span class="p">.</span><span class="nx">updateMask</span><span class="p">(</span><span class="nx">inWindow</span><span class="p">);</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">eddDaily</span><span class="p">.</span><span class="nx">sum</span><span class="p">().</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;EDD&#39;</span><span class="p">)</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">    </span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">Y</span><span class="p">)</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">    </span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;system:time_start&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">fromYMD</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">).</span><span class="nx">millis</span><span class="p">());</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="p">}</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="kd">var</span><span class="w"> </span><span class="nx">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="nx">startYear</span><span class="p">,</span><span class="w"> </span><span class="nx">endYear</span><span class="p">);</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="kd">var</span><span class="w"> </span><span class="nx">eddByYear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="nx">years</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">seasonEDD</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="p">}));</span>
+</span></code></pre></div>
+<h2 id="mapping-peak-wheat-growing-season">Mapping peak wheat growing season</h2>
+<p>Let's demonstrate the functions defined above with an example year. Explaining this:</p>
+<p><code>jan1   = ee.Date.fromYMD(EXAMPLE_YEAR, 1, 1).millis();</code> converts January 1<sup>st</sup> into date units and then into epoch milliseconds (the format Google Earth Engine uses for time).</p>
+<p>Then <code>var peakDOY = peakEx.select('peakMillis').subtract(jan1).divide(86400000).rename('peakDOY');</code>:</p>
+<ul>
+<li><code>peakEx.select('peakMillis')</code> is the image band holding, per pixel, the timestamp of maximum VI (also in epoch milliseconds).</li>
+<li><code>.subtract(jan1)</code> gives the elapsed time from Jan 1 to each pixel's peak NDVI, in milliseconds. </li>
+<li><code>.divide(86400000)</code> converts milliseconds to days. 86400000 is one day in milliseconds (24 × 60 × 60 × 1000 = 86,400 s × 1000). So a peak on Jan 1 → ~0, Feb 20 → ~50, and so on.</li>
+<li><code>.rename('peakDOY')</code> labels the resulting band.</li>
+</ul>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">peakEx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">seasonPeak</span><span class="p">(</span><span class="nx">EXAMPLE_YEAR</span><span class="p">);</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">jan1</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">fromYMD</span><span class="p">(</span><span class="nx">EXAMPLE_YEAR</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">).</span><span class="nx">millis</span><span class="p">();</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">peakDOY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">peakEx</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;peakMillis&#39;</span><span class="p">).</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">jan1</span><span class="p">)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="p">.</span><span class="nx">divide</span><span class="p">(</span><span class="mf">86400000</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;peakDOY&#39;</span><span class="p">);</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">peakDOY</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">aoi</span><span class="p">),</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="p">{</span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">90</span><span class="p">,</span><span class="w"> </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;00429d&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;73a2c6&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ffffbf&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;f4777f&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;93003a&#39;</span><span class="p">]},</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="s1">&#39;Peak VI day-of-year (&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">EXAMPLE_YEAR</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;)&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</span></code></pre></div>
+<details>
+  <summary><b>Can you generate a map of peak NDVI values for the <code>EXAMPLE_YEAR</code>?</b></summary>
+<p>
+
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">peakNDVI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">peakEx</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;VImax&#39;</span><span class="p">);</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1">// Over to you for visualising this layer!</span>
+</span></code></pre></div>
+</p>
+</details>
+
+<p>Now let's compute the peak NDVI, peak NDVI date, and extreme heat exposure during the wheat grain filling period for every pixel and year defined by the <code>startYear</code> and <code>endYear</code> variables. Start by creating a list of years (<code>var years = ee.List.sequence(startYear, endYear);</code>). Then map the function <code>seasonEDD()</code> that we defined previously over each year in the list. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a good moment to make sure you are comfortable with the concept of mapping functions over collections in Google Earth Engine. It is one of the key features of the Google Earth Engine platform and lets you scale spatio-temporal analysis across large areas and big geospatial datasets. Review the docs <a href="https://developers.google.com/earth-engine/guides/ic_mapping" target="_blank">here</a>.</p>
+</div>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="nx">startYear</span><span class="p">,</span><span class="w"> </span><span class="nx">endYear</span><span class="p">);</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">eddByYear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="nx">years</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">seasonEDD</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">}));</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1">// Compute an overall mean EDD layer for visualisation</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="kd">var</span><span class="w"> </span><span class="nx">meanEDD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eddByYear</span><span class="p">.</span><span class="nx">mean</span><span class="p">().</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;EDD_mean&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="trend-analysis">Trend analysis</h2>
+<p>The data is now prepared for computing temporal trends in extreme heat during the wheat crop's grain filling period. To be specific, the annual increase in extreme heat exposure during the grain filling period will be computed per-pixel. </p>
+<details>
+  <summary><b>Why are we dynamically computing a pixel and year specific grain filling period?</b></summary>
+<p>
+
+The study area is quite large spanning a substantial portion of North-West India and the Ganges Basin. Climatic and farm managment conditions vary across this extent so hard coding a grain filling period would likely mischaracterise the key period of wheat crop vulnerability to extreme heat in some locations. Further, the rice and wheat crops are grown in rotation. The sowing and growing season dates are affected by the harvest time of the preceding rice crop which introduces year-to-year variability. 
+</p>
+</details>
+
+<details>
+  <summary><b>Why does dynamically computing a pixel and year specific grain filling period mean we need to be careful about interpreting trends in the crop's extreme heat exposure?</b></summary>
+<p>
+
+An observed trend in extreme heat exposure might not be due to a climatic trend (i.e. an increase in extreme heat events over time) but could be due to changes in growing season dates over time (i.e. a trend of sowing crops later pushes the grain filling stage into warmer parts of the year). 
+</p>
+</details>
+
+<p>Google Earth Engine provides a <code>linearFit()</code> reducer for computing trends per-pixel using ordinary least squares regression. However, to use this reducer the data needs <code>ImageCollection</code> where each <code>Image</code> has a time band and a band storing the variable to compute trends for. </p>
+<p>The below code snippet <code>map</code>s over the <code>eddByYear</code> <code>ImageCollection</code> and extracts the band storing the per-pixel extreme heat metric and adds a year band. Conceptually, the year band will map onto the X-axis and and the <code>EDD</code> band will map onto the Y-axis in a trend analysis. </p>
+<p>Calling <code>.reduce(ee.Reducer.linearFit())</code> will compute slope and intercept coefficients per-pixel using the <code>year</code> and <code>EDD</code> bands. This returns an <code>Image</code> with two bands: <code>scale</code> and <code>offset</code>. <code>scale</code> corresponds to the slope coefficient in each pixel which is the trend of the annual increase in extreme heat exposure per year. </p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">trend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eddByYear</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">yr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">constant</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nb">Number</span><span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">))).</span><span class="nx">toDouble</span><span class="p">().</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">);</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">yr</span><span class="p">.</span><span class="nx">addBands</span><span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;EDD&#39;</span><span class="p">)).</span><span class="nx">select</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;EDD&#39;</span><span class="p">]);</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">});</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1">// Ordinary least squares trend</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="kd">var</span><span class="w"> </span><span class="nx">slopeOLS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">trend</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">linearFit</span><span class="p">())</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;EDD_trend_OLS&#39;</span><span class="p">);</span><span class="w">   </span><span class="c1">// deg C-day / yr</span>
+</span></code></pre></div>
+<details>
+  <summary><b>At the top of the script a cropland mask <code>cropMask</code> was loaded. Can you clip this mask to the <code>aoi</code> and mask out non-cropland areas from the <code>slopeOLS</code> <code>Image</code>? Call this <code>Image</code> <code>slopeOLSCrops</code>.</b></summary>
+<p>
+
+<div class="language-js highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">slopeOLSCrops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">slopeOLS</span><span class="p">.</span><span class="nx">updateMask</span><span class="p">(</span><span class="nx">cropMask</span><span class="p">);</span>
+</span></code></pre></div>
+</p>
+</details>
+
+<p><strong>Can you map the <code>slopeOLSCrops</code> <code>Image</code> to visualise spatial patterns in trends of extreme heat exposure during the wheat crop's grain filling stage? Think carefully about how you visualise this data. You are mapping a trend that can be positive (increasing extreme heat exposure) or negative (decreasing extreme heat exposure). What colour palettes help interpretation of these diverging signals?</strong>. </p>
+<p><strong>What is you initial assessment of the trend of the wheat crop's exposure to extreme heat during grain filling in the North-West Indo-Gangetic Plain?</strong></p>
+<details>
+  <summary><b>What could the cause of negative trends in extreme heat exposure?</b></summary>
+<p>
+Inter-annual variation in extreme heat exposure with some "cooler" years towards the end of the time-series pulling the trend down. Or, it could be a signal of farmer adaptation shifting planting dates earlier to avoid periods of extreme heat. This could be explored by i) comparing trends in extreme heat exposure during a fixed temporal window (e.g. March and April) - this would identify if there's a genuine climatic trend, or ii) looking for trends in start-of-season date and seeing if there is a correlation between trends in earlier start-of-season (proxy for planting) and negative trends in grain filling extreme heat exposure. 
+</p>
+</details>
+
+<details>
+  <summary><b>The trends on the map have a 250 m spatial resolution corresponding to MODIS pixels. Why does this require careful interpretation when MODIS data is combined with ~11 km sptial climate data?</b></summary>
+<p>
+The finer spatial resolution detail on the map all comes from the MODIS satellite images and the pixel-to-pixel variation in phenology. It does not reflect locally varying trends in extreme heat at sub 11 km spatial resolution scales.
+</p>
+</details>
+
+<p>Climatic data is often affected by extreme values or years which exert large influence on trends estimated using ordinary least squares regression. An alternative is to compute Sen's slope - the median difference between all pairs of points in a time-series. </p>
+<details>
+  <summary><b>This is the documentation for the <a href="https://developers.google.com/earth-engine/apidocs/ee-reducer-sensslope" target="_blank">Sen's Slope</a> in Google Earth Engine? Can you compute the trend in extreme heat exposure using Sen's slope and map the trends using the same visualisation parameters that were applied to the OLS trends?</b></summary>
+<p>
+
+<div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">slopeSen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">trend</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">sensSlope</span><span class="p">())</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;slope&#39;</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;EDD_trend_Sen&#39;</span><span class="p">);</span><span class="w">   </span><span class="c1">// deg C-day / yr</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">slopeSenCrops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">slopeSen</span><span class="p">.</span><span class="nx">updateMask</span><span class="p">(</span><span class="nx">cropMask</span><span class="p">);</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1">// Over to you for the visualisation</span>
+</span></code></pre></div>
+</p>
+</details>
+
+<p><strong>Homework activities</strong></p>
+<p>Trends in extreme heat exposure have been computed for multiple pixels. However, we don't know where these trends are statistically significant. To ascertain how much more vulnerable North-West India's wheat crop is becoming to extreme heat we need to perform significance testing and mask out pixels with "non-significant" slopes. There is an example of how to do this using Sen's Slope <a href="https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends#significance_testing" target="_blank">here</a>. Can you adapt this to perform significance testing for <code>slopeSenCrops</code>. </p>
+<p>What is the area of Punjab and Haryana that is affected by statistically significant trends of increasing extreme heat exposure during the grain filling stage? What is your assessment of how vulnerable the wheat crop is to extreme heat in this region? </p>
+<p>This next activity tests how well you can adapt this workflow to a different problem. Farm dams in Western Australia are a critical non-potable on-farm water resource in a dryland cropping landscape. The farm dams are filled by rainfall and runoff from bare earth "roaded" catchments. To generate runoff roaded catchments typically need rainfall events of at least 8 mm. Can you:</p>
+<p>1) find a dataset storing daily precipitation in Google Earth Engine's data catalog. </p>
+<p>2) compute the number of rainfall events greater than 8 mm per year.</p>
+<p>3) map the trends across South-West Western Australia in the number of 8 mm rainfall events. per year. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

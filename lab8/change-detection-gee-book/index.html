@@ -9,23 +9,25 @@
       
       
       
+        <link rel="prev" href="../../lab7/wa-deforestation-drivers/">
       
-        <link rel="next" href="lab5/javascript-intro/">
+      
+        <link rel="next" href="../trend-analysis-indian-crops-extreme-heat/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>GEOG3301 GEE Labs</title>
+        <title>Change detection - GEOG3301 GEE Labs</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -44,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#geog3301-advanced-gis-and-remote-sensing" class="md-skip">
+        <a href="#change-detection" class="md-skip">
           Skip to content
         </a>
       
@@ -78,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="GEOG3301 GEE Labs" class="md-header__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-header__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -98,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Change detection
             
           </span>
         </div>
@@ -176,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="GEOG3301 GEE Labs" class="md-nav__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
+    <a href="../.." title="GEOG3301 GEE Labs" class="md-nav__button md-logo" aria-label="GEOG3301 GEE Labs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -191,37 +193,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -237,87 +212,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#google-earth-engine-labs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Google Earth Engine Labs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#google-earth-engine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Google Earth Engine
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#google-earth-engine_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Google Earth Engine
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Google Earth Engine">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#applications" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Applications
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#useful-resources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Useful Resources
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -376,7 +270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab5/javascript-intro/" class="md-nav__link">
+      <a href="../../lab5/javascript-intro/" class="md-nav__link">
         
   
   
@@ -404,7 +298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab5/spatial-data-in-gee/" class="md-nav__link">
+      <a href="../../lab5/spatial-data-in-gee/" class="md-nav__link">
         
   
   
@@ -432,7 +326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab5/spatial-data-visualisation/" class="md-nav__link">
+      <a href="../../lab5/spatial-data-visualisation/" class="md-nav__link">
         
   
   
@@ -514,7 +408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab6/raster-data-operations-in-gee/" class="md-nav__link">
+      <a href="../../lab6/raster-data-operations-in-gee/" class="md-nav__link">
         
   
   
@@ -542,7 +436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab6/vector-data-operations-in-gee/" class="md-nav__link">
+      <a href="../../lab6/vector-data-operations-in-gee/" class="md-nav__link">
         
   
   
@@ -624,7 +518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab7/vegetation-skills/" class="md-nav__link">
+      <a href="../../lab7/vegetation-skills/" class="md-nav__link">
         
   
   
@@ -652,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab7/vegetation-indices/" class="md-nav__link">
+      <a href="../../lab7/vegetation-indices/" class="md-nav__link">
         
   
   
@@ -680,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab7/wa-deforestation-drivers/" class="md-nav__link">
+      <a href="../../lab7/wa-deforestation-drivers/" class="md-nav__link">
         
   
   
@@ -712,18 +606,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -744,7 +640,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -759,10 +655,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="lab8/change-detection-gee-book/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -778,6 +683,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -790,7 +696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab8/trend-analysis-indian-crops-extreme-heat/" class="md-nav__link">
+      <a href="../trend-analysis-indian-crops-extreme-heat/" class="md-nav__link">
         
   
   
@@ -818,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab8/australian-bushfires-time-series-intro/" class="md-nav__link">
+      <a href="../australian-bushfires-time-series-intro/" class="md-nav__link">
         
   
   
@@ -866,75 +772,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#google-earth-engine-labs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Google Earth Engine Labs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#google-earth-engine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Google Earth Engine
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#google-earth-engine_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Google Earth Engine
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Google Earth Engine">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#applications" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Applications
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#useful-resources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Useful Resources
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -950,46 +787,9 @@
 
 
 
-<h1 id="geog3301-advanced-gis-and-remote-sensing">GEOG3301 - Advanced GIS and Remote Sensing</h1>
-<h2 id="google-earth-engine-labs">Google Earth Engine Labs</h2>
-<p>Welcome to the lab materials for GEOG3301. Use the sidebar to navigate to each lab's content.</p>
-<p>A series of questions are posed throughout the lab as demonstrated below; these are to help you engage with the content, have a go at answering them and click on the question to reveal the answer. </p>
-<details>
-  <summary><b>Example Question?</b></summary>
-  <p><br>Answer.</p>
-</details>
-
-<h2 id="google-earth-engine">Google Earth Engine</h2>
-<p>These labs introduce Google Earth Engine as a tool for geospatial data analysis. Geospatial data analysis can be broken down into a workflow comprising four stages (that are often iterative):</p>
-<ul>
-<li>Data (variables to represent spatial concepts, phenomena, or entities - data collection, data entry, data download, and data import)</li>
-<li>Transform (transforming data so it can can be used for geospatial data analysis - summarising, combining, filtering)</li>
-<li>Visualisation (looking for patterns, features, and relationships in your data - maps, charts, tables)</li>
-<li>Model (use mathematical and statistical tools to answer questions using your data)</li>
-</ul>
-<h2 id="google-earth-engine_1">Google Earth Engine</h2>
-<p>Google Earth Engine is a platform for geospatial data analysis. It combines <a href="https://developers.google.com/earth-engine/datasets/" target="_blank">databases of big geospatial data</a> that are updated daily, a range of geospatial data analysis and processing functions, and access to cloud computing resources to apply these functions to geospatial datasets. </p>
-<p>You can access Google Earth Engine through the <a href="https://code.earthengine.google.com" target="_blank"><em>Code Editor</em></a> - a web-based interactive development environment (IDE) for creating Google Earth Engine programs for geospatial data analysis and visualising the results in web maps, interactive charts, or text summaries.</p>
-<iframe width="720" height="405" src="https://www.youtube.com/embed/gKGOeTFHnKY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-<p><a href="https://www.sciencedirect.com/science/article/pii/S0034425717302900" target="_blank">Gorelick et al. (2017)</a> provide a detailed description of the Google Earth Engine platform.</p>
-<h3 id="applications">Applications</h3>
-<p>Applications of Google Earth Engine span a variety of disciplines which utilise geospatial data:</p>
-<ul>
-<li><a href="https://earthenginepartners.appspot.com/science-2013-global-forest" target="_blank">Monitoring global forest change</a></li>
-<li><a href="http://species.mol.org/species/map/Perdix_dauurica" target="_blank">Mapping habitat ranges</a></li>
-<li><a href="https://blog.google/around-the-globe/google-europe/nature-water-unveiling-most-detailed-view-water-earth/" target="_blank">Global water security</a></li>
-<li><a href="http://www.g-feed.com/2015/05/introducing-scym.html" target="_blank">Monitoring global croplands</a></li>
-<li><a href="https://medium.com/google-earth/mapping-global-travel-time-to-urban-resources-448c1d7919d2" target="_blank">Mapping travel time to urban centres</a></li>
-</ul>
-<p>More examples of how Google Earth Engine is used can be found on the <a href="https://medium.com/google-earth/tagged/earth-engine" target="_blank">Google Earth Engine blog</a>.</p>
-<h2 id="useful-resources">Useful Resources</h2>
-<p>There are a range user resources for Google Earth Engine. You should use these resources to supplement the work done in the labs. Becoming familiar with these resources will help you troubleshoot problems. Using these resources will develop your independent problem solving skills when undertaking geospatial data analysis. </p>
-<ol>
-<li><a href="https://developers.google.com/earth-engine/" target="_blank">Google Earth Engine introduction</a> - comprehensive overview of Google Earth Engine's capabilities. </li>
-<li><a href="https://developers.google.com/earth-engine/tutorials" target="_blank">Google Earth Engine tutorials</a> - range of introductory and advanced tutorials on using Google Earth Engine for geospatial data analysis.</li>
-<li><a href="https://developers.google.com/earth-engine/edu" target="_blank">Google Earth Engine for education</a> - range of training resources. </li>
-</ol>
+<h1 id="change-detection">Change detection</h1>
+<p>The <a href="https://www.eefabook.org" target="_blank">Cloud-Based Remote Sensing with Google Earth Engine</a> has a good chapter on change detection. Can you work through the lab exercises in <a href="https://docs.google.com/document/d/11oo1TuvXyEvReoYLDeTcoh16rEN90I8Bf5qp0KxVu7U/edit?tab=t.0#heading=h.io68jaoqcknl" target="_blank">Chapter F4.4</a>. This build on the earlier ArcGIS lab mapping burnt ares for bushfires near Perth by demonstrating how to implement and scale similar analyses in Google Earth Engine. </p>
+<p><b>Go to <a href="https://docs.google.com/document/d/11oo1TuvXyEvReoYLDeTcoh16rEN90I8Bf5qp0KxVu7U/edit?tab=t.0#heading=h.io68jaoqcknl" target="_blank">Chapter F4.4</a>.</b></p>
 
 
 
@@ -1039,12 +839,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="javascripts/mathjax.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
