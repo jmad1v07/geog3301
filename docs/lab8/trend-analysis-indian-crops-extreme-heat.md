@@ -168,6 +168,8 @@ Map.addLayer(peakDOY.clip(aoi),
   'Peak VI day-of-year (' + EXAMPLE_YEAR + ')', false);
 ```
 
+**Can you spot visual artefacts in the map of peak wheat growing season day of year? These maps are generated from 16 day MODIS NDVI composite images. Read up on composite images in Chapter 10 of Volume 2D in the <a href="https://www.eoa.org.au/earth-observation-textbooks" target="_blank">Earth Observation Australia textbooks</a>. Reflect on the strengths and weaknesses of using 16 day composite images to map peak wheat growing season date.**
+
 <details>
   <summary><b>Can you generate a map of peak NDVI values for the <code>EXAMPLE_YEAR</code>?</b></summary>
 <p>
@@ -179,6 +181,7 @@ var peakNDVI = peakEx.select('VImax');
 ```
 </p>
 </details>
+
 
 Now let's compute the peak NDVI, peak NDVI date, and extreme heat exposure during the wheat grain filling period for every pixel and year defined by the `startYear` and `endYear` variables. Start by creating a list of years (`var years = ee.List.sequence(startYear, endYear);`). Then map the function `seasonEDD()` that we defined previously over each year in the list. 
 
