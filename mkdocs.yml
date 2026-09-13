@@ -38,3 +38,7 @@ nav:
       - Remote sensing of vegetation skills: lab7/vegetation-skills.md
       - Interpreting vegetation indices: lab7/vegetation-indices.md
       - WA deforestation drivers: lab7/wa-deforestation-drivers.md      
+  - Lab 8:
+      - Change detection: lab8/change-detection-gee-book.md 
+      - Trend analysis - Extreme heat over Indian croplands: lab8/trend-analysis-indian-crops-extreme-heat.md
+      - Time-series skills - Australian Bushfires: lab8/australian-bushfires-time-series-intro.md

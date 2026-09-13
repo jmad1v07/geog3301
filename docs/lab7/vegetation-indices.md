@@ -18,7 +18,7 @@ The enhanced vegetation index (EVI) has been developed to capture the signal of 
 
 $$EVI = G \times \frac{NIR - red}{{NIR} + C_1{red} - C_2{blue} + L}$$
 
-$$EVI = 2.5 \times \frac{{NIR} - {red}}{{NIR} + 6{Red} - 7.5{blue} + 1}$$
+$$EVI = 2.5 \times \frac{{NIR} - {red}}{{NIR} + 6{red} - 7.5{blue} + 1}$$
 
 The L in the denominator is a constant (typically 1 for EVI). When red reflectance tends towards zero, the denominator remains $NIR + 1$ so increases in NIR still register. As NIR reflectance corresponds to scattering by cells within leaves and leaves within the canopy, it's more sensitive to the structure of the canopy. 
 
