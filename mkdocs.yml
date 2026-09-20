@@ -42,3 +42,6 @@ nav:
       - Change detection: lab8/change-detection-gee-book.md 
       - Trend analysis - Extreme heat over Indian croplands: lab8/trend-analysis-indian-crops-extreme-heat.md
       - Time-series skills - Australian Bushfires: lab8/australian-bushfires-time-series-intro.md
+  - Lab 9:
+      - Supervised classification: lab9/supervised-classification.md
+      - Accuracy assessment: lab9/accuracy-assessment.md
