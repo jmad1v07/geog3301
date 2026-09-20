@@ -45,3 +45,4 @@ nav:
   - Lab 9:
       - Supervised classification: lab9/supervised-classification.md
       - Accuracy assessment: lab9/accuracy-assessment.md
+      - Earth embeddings: lab9/earth-embeddings.md
