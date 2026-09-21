@@ -144,7 +144,7 @@ Map.addLayer(composite.clip(geometry), rgbVis, 'image');
 **In the above code snippet `maskS2clouds` is not mapped over the collection of Sentinel-2 `Image`s to remove cloudy pixels and rescale the surface reflectance data to limits of 0 and 1. Can you `map()` `maskS2clouds` over the `s2` `ImageCollection` before computing the median composite `Image`?**
 
 !!! note
-  If you do not apply `maskS2clouds` the `composite` `Image` will not render any variation on the map display as the `rgbViz` visualisation parameters are set up for scaled Sentinel-2 reflectance values. 
+    If you do not apply `maskS2clouds` the `composite` `Image` will not render any variation on the map display as the `rgbViz` visualisation parameters are set up for scaled Sentinel-2 reflectance values. 
 
 The `FeatureCollection` `gcps` stores the land cover label for each point. It does not contain spectral reflectance values at each point (i.e. the input predictors). To train a classifier we need to attach the spectral reflectance values. To do this we can `sample` the `composite` `Image` at the point locations. The following code snippet does this.
 
